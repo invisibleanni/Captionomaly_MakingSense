@@ -15,9 +15,12 @@ j = 0
 sentences = []
 sentences.append([])
 sentences.append([])
+
+
 for i in range(0, 13):
     file_path = folder_path + "/" + files[i]
     df = pd.read_csv(file_path)
+    
     for i in range(0, len(df['File Name'])):
         sentences[0].append(df['Caption 1'][i])
         sentences[0].append(df['Caption 2'][i])
@@ -30,6 +33,7 @@ for i in range(0, 13):
         sentences[1].append(j)
         sentences[1].append(j)
         sentences[1].append(j)
+        
         j = j + 1
         
 with open("ucfc-vd_sentence_videoID.pkl", 'wb') as fh:
