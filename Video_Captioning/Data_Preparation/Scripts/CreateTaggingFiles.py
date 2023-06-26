@@ -2,6 +2,8 @@
 # Author: Adit Goyal
 # Date: 2021-06-18
 
+
+# imports------------------------------------------------
 import pickle
 import pandas as pd
 import numpy as np
@@ -21,15 +23,20 @@ RefFile = "UCFC-VD_Data_Prep/Files/ucfc-vd_ref.pkl"
 #Path to the Sentence-VideoID file
 sentence_videoID = "UCFC-VD_Data_Prep/Files/ucfc-vd_sentence_videoID.pkl"
 
+####################################################################################################
+
+
 #Dimensions of tag_gt: [no. of videos, no. of labels]
 tag_gt = np.zeros([950, 300], np.int32)
 
 with open(CorpusFile, 'rb') as fo:
+    
     data = pickle.load(fo)
     train, val, test = data[0], data[1], data[2]
     word2idx, idx2word = data[3], data[4]
     n_v = len(idx2word)
     counter = np.zeros([n_v], np.int32)
+    
     for sent in train[0]:
         for w in sent:
             counter[w] += 1
@@ -43,17 +50,23 @@ with open(CorpusFile, 'rb') as fo:
     counter_sorted = np.sort(counter)[::-1]
 
     word_sorted = []
+    
     for i in indices:
         word_sorted.append(idx2word[i])
 
+
 sentences = pickle.load(open(RefFile, 'rb'))
 sentences_list = []
+
+
 for i in sentences[0]+sentences[1]:
     for j in i:
         sentences_list.append(j)
 
+
 #Tokenization to create labels
 string = ""
+
 for i in sentences_list:
     string = string + " " + i
 
