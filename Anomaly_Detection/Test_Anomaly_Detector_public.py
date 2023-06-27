@@ -2,7 +2,11 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation
 from keras.regularizers import l2
 from keras.optimizers import SGD ,Adagrad
+
+
 from scipy.io import loadmat, savemat
+# used for matlab files
+
 from keras.models import model_from_json
 import theano.tensor as T
 import theano
